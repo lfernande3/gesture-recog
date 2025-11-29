@@ -1,1 +1,0 @@
-Gesture UI Control (static poses) – MediaPipe Hands for keypoints + simple classifier (MLP/SVM) for 4–5 gestures.

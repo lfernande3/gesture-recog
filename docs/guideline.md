@@ -1,4 +1,4 @@
-## Project Assignment
+## Project Assignment Guidelines
 
 **Course project:** Computer vision applications
 
