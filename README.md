@@ -378,18 +378,6 @@ gesture-recog/
 - **Lighting Dependent:** Performance degrades in poor lighting
 - **Training Required:** Must collect your own gesture data
 
-## Future Improvements
-
-- Add "No gesture" class for better robustness
-- Support for left/right hand normalization
-- Relative coordinate features (wrist-centered)
-- Multi-hand detection
-- Dynamic gesture sequences
-- Mobile deployment (Android/iOS)
-
-## License
-
-This project is for educational purposes. MediaPipe is licensed under Apache 2.0.
 
 ## References
 
@@ -405,5 +393,3 @@ For issues or questions:
 3. Ensure all prerequisites are met (Python 3.10, Windows, etc.)
 
 ---
-
-**Happy Gesturing!** 🎭✨
