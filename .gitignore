@@ -1,0 +1,93 @@
+# Python bytecode and artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+
+# Virtual environments
+/.venv310/
+/.venv*/
+.venv/
+venv/
+env/
+ENV/
+.conda/
+conda/
+
+# Packaging / build
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+*.whl
+
+# Caches and test artifacts
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+coverage/
+htmlcov/
+cov.xml
+
+# Logs
+logs/
+log/
+*.log
+*.out
+*.err
+
+# Experiment tracking and training runs
+wandb/
+lightning_logs/
+runs/
+tb_logs/
+tensorboard/
+mlruns/
+
+# Data and outputs (adjust if you want to keep specific ones)
+data/
+datasets/
+Data/
+outputs/
+output/
+results/
+artifacts/
+checkpoints/
+models/
+model/
+tmp/
+temp/
+
+# Common model/weight files
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pb
+*.tflite
+*.onnx
+*.joblib
+*.pkl
+*.pickle
+*.npz
+
+# OS/IDE
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (if present)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+

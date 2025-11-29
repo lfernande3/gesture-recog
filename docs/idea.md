@@ -22,6 +22,7 @@ Enable touchless control of common PC functions (media playback, slide navigatio
 - Classifier: scikit-learn SVM (RBF) with StandardScaler (baseline), optionally compare MLP and KNN.
 - Trigger logic: confidence threshold and debounce window to prevent repeated actions.
 - System actions: `pyautogui` for key presses; `pycaw` for Windows volume control.
+- Target platform: Local Windows 10/11 (native, not WSL). Real-time control relies on Windows APIs via `pycaw`.
 
 ### Dataset and collection
 - Collect ~180–220 samples per gesture (≈ 900–1,100 samples total).
@@ -50,8 +51,8 @@ Enable touchless control of common PC functions (media playback, slide navigatio
 - Ablations: with/without scaling; SVM vs MLP vs KNN; optional relative coordinate normalization.
 
 ### Deliverables
-- One Jupyter/Colab notebook with:
-  - Environment setup, data collection UI, training, evaluation, and real-time demo cells.
+- One local Jupyter notebook (or Python scripts) with:
+  - Environment setup (Windows 10/11), data collection, training, evaluation, and real-time demo.
   - Saved artifacts: `gesture_data.csv`, `gesture_classifier.pkl`.
 - Short demo video of real-time control.
 - 4-page CVPR-style report with pipeline diagram, dataset summary, metrics table, confusion matrix, and discussion.
