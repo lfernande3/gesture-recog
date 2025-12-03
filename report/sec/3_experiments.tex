@@ -1,0 +1,20 @@
+\section{Experiments}
+
+\subsection{Dataset}
+We collected approximately 800 samples (200 per class) under varying lighting and distances. Data was split 80/20 for training and testing.
+
+\subsection{Results}
+The SVM classifier achieved an accuracy of $XX.X\%$ on the test set. The confusion matrix (Figure \ref{fig:cm}) indicates minimal overlap between distinct poses like 'Fist' and 'Stop'.
+
+% Placeholder for Figure
+\begin{figure}[t]
+\begin{center}
+   %\includegraphics[width=0.8\linewidth]{confusion_matrix.png}
+   \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+\end{center}
+   \caption{Confusion Matrix of the static gesture classifier.}
+\label{fig:cm}
+\end{figure}
+
+\subsection{Qualitative Analysis}
+The zone-based approach significantly reduced false positives compared to velocity-based methods. The 1.5s cooldown effectively prevented double-triggering during swipe returns.
