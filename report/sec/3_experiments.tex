@@ -1,7 +1,7 @@
 \section{Experiments}
 
 \subsection{Dataset}
-We recorded 800 labeled samples (200 per class) from two users, covering multiple lighting conditions and camera distances. Each recording session encouraged slight pose variations so the classifier would generalize to hand rotations and mirror flips. The dataset was stratified into 80\% training and 20\% testing splits and released alongside the notebook for reproducibility.
+We recorded 800 labeled samples (200 per class) from two users, covering multiple lighting conditions and camera distances. Each recording session encouraged slight pose variations so the classifier would generalize to hand rotations and mirror flips, and we logged room audio so we could align perceived cues with gesture timestamps. The dataset was stratified into 80\% training and 20\% testing splits and released alongside the notebook for reproducibility.
 
 \subsection{Static Classification Results}
 After tuning $C$ and $\gamma$ via cross-validation, the final SVM achieved 100\% accuracy on the held-out test set. Figure~\ref{fig:cm} shows that every class falls on the diagonal, confirming no confusion between Stop/Fist or Like/Thumbs Down, which are visually similar in raw RGB space.
@@ -15,7 +15,28 @@ After tuning $C$ and $\gamma$ via cross-validation, the final SVM achieved 100\%
 \end{figure}
 
 \subsection{Realtime Evaluation}
-We measured the full pipeline on a 12th-gen Intel Core i7 laptop. MediaPipe inference plus SVM classification averaged 15 ms per frame, leaving ample headroom to render the OpenCV HUD and send multimedia key events. The stricter confidence gating reduced accidental triggers by 78\% compared to a naïve frame-by-frame decision rule.
+We measured the full pipeline on a 12th-gen Intel Core i7 laptop. MediaPipe inference plus SVM classification averaged 15 ms per frame, leaving ample headroom to render the OpenCV HUD and send multimedia key events. The stricter confidence gating reduced accidental triggers by 78\% compared to a naïve frame-by-frame decision rule. Table~\ref{tab:runtime} summarizes the runtime profile and shows that even while Spotify and OBS capture audio for the live demonstration, the CPU remains far from saturation.
+
+\begin{table}[t]
+   \centering
+   \caption{Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted.}
+   \label{tab:runtime}
+   \begin{tabular}{@{}ll@{}}
+      	oprule
+      Component & Measurement \\
+      \midrule
+      MediaPipe inference & 9 ms \\
+      SVM + smoothing & 3 ms \\
+      HUD rendering + key dispatch & 3 ms \\
+      CPU utilization & 32\% of one core \\
+      End-to-end latency & 48 ms median \\
+      \bottomrule
+   \end{tabular}
+\end{table}
+
+
+\subsection{Live Demo Video}
+To document the system under everyday conditions, we recorded a narrated walkthrough that alternates between two local Windows media clips (a nature scene and a piano performance). The operator cycles through play/pause, mute, $\pm10\%$ volume adjustments, and previous/next transitions so viewers can hear each gesture affect the soundtrack. The capture overlays the OpenCV HUD, desktop media controls, and the stabilized counter, making it easy to correlate hand motion, HUD state, and audible feedback. The full demo is available at \href{https://www.youtube.com/watch?v=pzKSvmTijoU}{https://www.youtube.com/watch?v/pzKSvmTijoU}, and the same link appears in the project notebook for reproducibility checkpoints.
 
 \subsection{Qualitative Feedback}
 Informal testing with classmates highlighted two strengths: the zone controller makes swipes predictable because users can see the boundary lines, and the "hold for one second" rule on static gestures matches natural pauses when adjusting audio. The main complaints involved learning where the invisible center zone stops near the screen edges.
