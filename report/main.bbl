@@ -1,0 +1,35 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Cortes and Vapnik(1995)]{svm}
+Corinna Cortes and Vladimir Vapnik.
+\newblock Support-vector networks.
+\newblock \emph{Machine learning}, 20\penalty0 (3):\penalty0 273--297, 1995.
+
+\bibitem[Lugaresi et~al.(2019)Lugaresi, Tang, Nash, McClanahan, Uboweja, Hays,
+  Zhang, Chang, Yong, Lee, et~al.]{mediapipe}
+Camillo Lugaresi, Jiuqiang Tang, Hadon Nash, Chris McClanahan, Esha Uboweja,
+  Michael Hays, Fan Zhang, Chuo-Ling Chang, Ming~Guang Yong, Juhyun Lee, et~al.
+\newblock Mediapipe: A framework for building perception pipelines.
+\newblock \emph{arXiv preprint arXiv:1906.08172}, 2019.
+
+\bibitem[Oudah et~al.(2020)Oudah, Al-Naji, and Chahl]{gesture_survey}
+Munir Oudah, Ali Al-Naji, and Javaan Chahl.
+\newblock A survey on hand gesture recognition methods in computer vision.
+\newblock \emph{Sensors}, 20\penalty0 (21):\penalty0 6317, 2020.
+
+\bibitem[Pedregosa et~al.(2011)Pedregosa, Varoquaux, Gramfort, Michel, Thirion,
+  Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay]{scikit-learn}
+F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M.
+  Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D.
+  Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock \emph{Journal of Machine Learning Research}, 12:\penalty0 2825--2830,
+  2011.
+
+\end{thebibliography}

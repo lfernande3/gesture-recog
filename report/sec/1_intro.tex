@@ -1,11 +1,11 @@
 \section{Introduction}
 \label{sec:intro}
 
-Touchless interfaces have gained significance for hygiene, accessibility, and convenience. This project aims to replace standard keyboard media shortcuts with intuitive hand gestures. Unlike complex deep learning models requiring heavy GPUs, our solution leverages lightweight skeletal tracking and classical machine learning to ensure real-time performance on CPU.
+Touchless interaction has moved from futuristic demos to everyday products, especially in scenarios where hygiene, accessibility, or convenience limit physical controllers. Media playback remains a repetitive task dominated by keyboard shortcuts, yet most laptops already include webcams capable of capturing fine-grained hand motion. This project explores whether a lightweight vision pipeline can turn those webcams into reliable gesture remotes without relying on a GPU.
 
-The primary contributions of this work are:
-\begin{itemize}
-    \item A lightweight SVM-based classifier for static gesture recognition.
-    \item A robust zone-based interaction model for dynamic navigation that reduces user fatigue.
-    \item A real-time integration with Windows system audio and media controls.
-\end{itemize}
+Our system keeps the model simple and the interaction consistent. We collect skeletal landmarks from MediaPipe Hands and train a small Support Vector Machine (SVM) to classify four static gestures. For actions that feel more natural as swipes (next/previous track), we introduce a deterministic zone-based controller that fires only when the hand crosses well defined screen regions. Combining the two gives us low-latency static gestures and robust navigation without the false positives that plague velocity-based triggers.
+
+In summary, we contribute (1) a CPU-friendly hand gesture recognizer powered by an SVM trained on 63-D landmark vectors, (2) a finite-state zone navigation scheme that removes the need for motion heuristics, and (3) an end-to-end Windows integration that maps gestures directly to system media shortcuts and demonstrates real-time use.
+
+\subsection{Related Work}
+Early gesture systems either segmented skin-color blobs or required depth sensors such as the Microsoft Kinect \cite{gesture_survey}. Modern pipelines leverage learning-based keypoint detectors; MediaPipe Hands in particular offers accurate 3D landmarks from a single RGB input and runs efficiently on laptops \cite{mediapipe}. Once landmarks are available, classical classifiers such as SVMs remain competitive because they operate on compact feature vectors and offer strong decision boundaries \cite{svm}. Toolkits like scikit-learn simplify deployment of such models and provide calibrated probabilities that help us filter noisy frames \cite{scikit-learn}.

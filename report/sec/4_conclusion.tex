@@ -1,2 +1,5 @@
 \section{Conclusion}
-We successfully developed a low-latency gesture control system. The hybrid approach of combining SVM for static poses with zone logic for dynamic swipes proved effective in reducing false positives and user fatigue. Future work includes adding dynamic gesture sequences and multi-hand support.
+The project demonstrates that a webcam plus a lightweight SVM is enough to deliver a dependable media controller. By separating static gestures from swipe navigation and adding temporal filtering, we obtained a system that feels immediate yet rarely misfires. The full implementation, including dataset, notebook, and real-time demo script, is released so classmates can reproduce or extend the interface.
+
+\subsection{Future Work}
+Looking ahead, we plan to (1) add dynamic sequences via temporal models such as LSTMs to capture gestures like "wave" or "circle", (2) auto-calibrate zone boundaries for different aspect ratios or external webcams, and (3) explore multi-hand combinations that could map to richer controls such as scrubbing or playlist selection.

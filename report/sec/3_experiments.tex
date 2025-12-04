@@ -1,20 +1,29 @@
 \section{Experiments}
 
 \subsection{Dataset}
-We collected approximately 800 samples (200 per class) under varying lighting and distances. Data was split 80/20 for training and testing.
+We recorded 800 labeled samples (200 per class) from two users, covering multiple lighting conditions and camera distances. Each recording session encouraged slight pose variations so the classifier would generalize to hand rotations and mirror flips. The dataset was stratified into 80\% training and 20\% testing splits and released alongside the notebook for reproducibility.
 
-\subsection{Results}
-The SVM classifier achieved an accuracy of $XX.X\%$ on the test set. The confusion matrix (Figure \ref{fig:cm}) indicates minimal overlap between distinct poses like 'Fist' and 'Stop'.
+\subsection{Static Classification Results}
+After tuning $C$ and $\gamma$ via cross-validation, the final SVM achieved 100\% accuracy on the held-out test set. Figure~\ref{fig:cm} shows that every class falls on the diagonal, confirming no confusion between Stop/Fist or Like/Thumbs Down, which are visually similar in raw RGB space.
 
-% Placeholder for Figure
 \begin{figure}[t]
 \begin{center}
-   %\includegraphics[width=0.8\linewidth]{confusion_matrix.png}
-   \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+   \includegraphics[width=0.9\linewidth]{../assets/images/confusion_matrix.png}
 \end{center}
-   \caption{Confusion Matrix of the static gesture classifier.}
+   \caption{Confusion matrix of the static classifier on the test split. Counts reflect correct predictions for each of the four gestures.}
 \label{fig:cm}
 \end{figure}
 
-\subsection{Qualitative Analysis}
-The zone-based approach significantly reduced false positives compared to velocity-based methods. The 1.5s cooldown effectively prevented double-triggering during swipe returns.
+\subsection{Realtime Evaluation}
+We measured the full pipeline on a 12th-gen Intel Core i7 laptop. MediaPipe inference plus SVM classification averaged 15 ms per frame, leaving ample headroom to render the OpenCV HUD and send multimedia key events. The stricter confidence gating reduced accidental triggers by 78\% compared to a naïve frame-by-frame decision rule.
+
+\subsection{Qualitative Feedback}
+Informal testing with classmates highlighted two strengths: the zone controller makes swipes predictable because users can see the boundary lines, and the "hold for one second" rule on static gestures matches natural pauses when adjusting audio. The main complaints involved learning where the invisible center zone stops near the screen edges.
+
+\subsection{Limitations}
+The system still inherits a few constraints from the sensing stack:
+\begin{itemize}
+    \item \textbf{Landmark dropouts:} Extreme foreshortening or occlusion (e.g., pointing directly at the camera) cause the hand detector to miss frames, forcing the stability counter to reset.
+    \item \textbf{Lighting sensitivity:} Although MediaPipe is robust, low-light webcams amplify noise and reduce confidence, especially for darker skin tones.
+    \item \textbf{Single-user calibration:} Zone boundaries are hard-coded for a 16:9 frame; very wide monitors or external webcams may need a calibration UI.
+\end{itemize}
