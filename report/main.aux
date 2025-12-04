@@ -14,38 +14,50 @@
 \@writefile{brf}{\backcite{mediapipe}{{1}{1.1}{subsection.1.1}}}
 \@writefile{brf}{\backcite{svm}{{1}{1.1}{subsection.1.1}}}
 \@writefile{brf}{\backcite{scikit-learn}{{1}{1.1}{subsection.1.1}}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}\hskip -1em.~Methodology}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}\hskip -1em.~System Architecture}{1}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}\hskip -1em.~Feature Extraction}{1}{subsection.2.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Static gestures and their corresponding Windows media actions.}}{2}{table.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces High-level dataflow from camera input to issued media actions. Only compact landmarks leave the MediaPipe block, keeping the rest of the stack lightweight and privacy-preserving.}}{2}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:gestures}{{1}{2}{Static gestures and their corresponding Windows media actions}{table.caption.1}{}}
-\newlabel{tab:gestures@cref}{{[table][1][]1}{[1][2][]2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Live interface overlay displaying zone partitions, current state, and the stabilized prediction counter.}}{2}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:ui}{{1}{2}{Live interface overlay displaying zone partitions, current state, and the stabilized prediction counter}{figure.caption.2}{}}
-\newlabel{fig:ui@cref}{{[figure][1][]1}{[1][2][]2}}
+\newlabel{fig:system}{{1}{2}{High-level dataflow from camera input to issued media actions. Only compact landmarks leave the MediaPipe block, keeping the rest of the stack lightweight and privacy-preserving}{figure.caption.1}{}}
+\newlabel{fig:system@cref}{{[figure][1][]1}{[1][2][]2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}\hskip -1em.~Methodology}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}\hskip -1em.~System Architecture}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}\hskip -1em.~Feature Extraction}{2}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}\hskip -1em.~Static Gesture Classification}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Static gestures and their corresponding Windows media actions.}}{2}{table.caption.2}\protected@file@percent }
+\newlabel{tab:gestures}{{1}{2}{Static gestures and their corresponding Windows media actions}{table.caption.2}{}}
+\newlabel{tab:gestures@cref}{{[table][1][]1}{[1][2][]2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Pseudocode of the zone-based controller. Actions only fire on CENTER$\rightarrow $edge transitions once the shared cooldown expires.}}{2}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:zone-fsm}{{2}{2}{Pseudocode of the zone-based controller. Actions only fire on CENTER$\rightarrow $edge transitions once the shared cooldown expires}{figure.caption.3}{}}
+\newlabel{fig:zone-fsm@cref}{{[figure][2][]2}{[1][2][]2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}\hskip -1em.~Zone-Based Navigation}{2}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}\hskip -1em.~Experiments}{2}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}\hskip -1em.~Dataset}{2}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Confusion matrix of the static classifier on the test split. Counts reflect correct predictions for each of the four gestures.}}{2}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:cm}{{2}{2}{Confusion matrix of the static classifier on the test split. Counts reflect correct predictions for each of the four gestures}{figure.caption.3}{}}
-\newlabel{fig:cm@cref}{{[figure][2][]2}{[1][2][]2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}\hskip -1em.~Static Classification Results}{2}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}\hskip -1em.~Realtime Evaluation}{2}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}\hskip -1em.~Live Demo Video}{2}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Live interface overlay displaying zone partitions, current state, and the stabilized prediction counter.}}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:ui}{{3}{3}{Live interface overlay displaying zone partitions, current state, and the stabilized prediction counter}{figure.caption.4}{}}
+\newlabel{fig:ui@cref}{{[figure][3][]3}{[1][2][]3}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Frame counts per gesture in the collected dataset. Counts remain tightly clustered so the SVM does not bias toward a dominant class.}}{3}{table.caption.5}\protected@file@percent }
+\newlabel{tab:data-stats}{{2}{3}{Frame counts per gesture in the collected dataset. Counts remain tightly clustered so the SVM does not bias toward a dominant class}{table.caption.5}{}}
+\newlabel{tab:data-stats@cref}{{[table][2][]2}{[1][3][]3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}\hskip -1em.~Experiments}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}\hskip -1em.~Dataset}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}\hskip -1em.~Static Classification Results}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Per-class precision, recall, f1, and support on the held-out test split. Metrics are derived from the exported notebook table for reproducibility.}}{3}{table.caption.6}\protected@file@percent }
+\newlabel{tab:per-class}{{3}{3}{Per-class precision, recall, f1, and support on the held-out test split. Metrics are derived from the exported notebook table for reproducibility}{table.caption.6}{}}
+\newlabel{tab:per-class@cref}{{[table][3][]3}{[1][3][]3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Confusion matrix of the static classifier on the test split. Counts reflect correct predictions for each of the four gestures.}}{3}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:cm}{{4}{3}{Confusion matrix of the static classifier on the test split. Counts reflect correct predictions for each of the four gestures}{figure.caption.7}{}}
+\newlabel{fig:cm@cref}{{[figure][4][]4}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}\hskip -1em.~Realtime Evaluation}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}\hskip -1em.~Live Demo Video}{3}{subsection.3.4}\protected@file@percent }
 \bibstyle{ieeenat_fullname}
 \bibdata{main}
 \bibcite{svm}{{1}{1995}{{Cortes and Vapnik}}{{}}}
 \bibcite{mediapipe}{{2}{2019}{{Lugaresi et~al.}}{{Lugaresi, Tang, Nash, McClanahan, Uboweja, Hays, Zhang, Chang, Yong, Lee, et~al.}}}
 \bibcite{gesture_survey}{{3}{2020}{{Oudah et~al.}}{{Oudah, Al-Naji, and Chahl}}}
 \bibcite{scikit-learn}{{4}{2011}{{Pedregosa et~al.}}{{Pedregosa, Varoquaux, Gramfort, Michel, Thirion, Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos, Cournapeau, Brucher, Perrot, and Duchesnay}}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted.}}{3}{table.caption.4}\protected@file@percent }
-\newlabel{tab:runtime}{{2}{3}{Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted}{table.caption.4}{}}
-\newlabel{tab:runtime@cref}{{[table][2][]2}{[1][2][]3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}\hskip -1em.~Qualitative Feedback}{3}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}\hskip -1em.~Limitations}{3}{subsection.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}\hskip -1em.~Conclusion}{3}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}\hskip -1em.~Future Work}{3}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}\hskip -1em.~Contribution}{3}{section.5}\protected@file@percent }
-\gdef \@abspage@last{3}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted.}}{4}{table.caption.8}\protected@file@percent }
+\newlabel{tab:runtime}{{4}{4}{Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted}{table.caption.8}{}}
+\newlabel{tab:runtime@cref}{{[table][4][]4}{[1][3][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}\hskip -1em.~Qualitative Feedback}{4}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}\hskip -1em.~Limitations}{4}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}\hskip -1em.~Conclusion}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}\hskip -1em.~Future Work}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}\hskip -1em.~Contribution}{4}{section.5}\protected@file@percent }
+\gdef \@abspage@last{4}

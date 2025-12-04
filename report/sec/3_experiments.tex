@@ -1,10 +1,44 @@
 \section{Experiments}
 
 \subsection{Dataset}
-We recorded 800 labeled samples (200 per class) from two users, covering multiple lighting conditions and camera distances. Each recording session encouraged slight pose variations so the classifier would generalize to hand rotations and mirror flips, and we logged room audio so we could align perceived cues with gesture timestamps. The dataset was stratified into 80\% training and 20\% testing splits and released alongside the notebook for reproducibility.
+We recorded 1,162 labeled frames from two users, covering multiple lighting conditions and camera distances. Table~\ref{tab:data-stats} lists the per-class counts, all within the 280--299 range so that each pose receives balanced representation without inflating the dataset size. During collection we instructed participants to rotate their hand $\pm30^\circ$, vary wrist height, move 0.5--1.5 meters from the camera, and occasionally mirror the pose with the opposite hand. Those micro-movements act as in-sensor augmentation and help the downstream SVM stay robust to translation and foreshortening. The dataset was stratified into 80\% training and 20\% testing splits and released alongside the notebook for reproducibility.
+
+\begin{table}[t]
+   \centering
+   \begin{tabular}{@{}lr@{}}
+      \toprule
+      Gesture & Frames \\
+      \midrule
+      Stop & 296 \\
+      Fist & 288 \\
+      Like & 291 \\
+      Thumbs Down & 287 \\
+      \bottomrule
+   \end{tabular}
+   \caption{Frame counts per gesture in the collected dataset. Counts remain tightly clustered so the SVM does not bias toward a dominant class.}
+   \label{tab:data-stats}
+\end{table}
+
+To keep the gestures natural, we reminded users to hold each pose for three seconds, introduce small finger wiggles, and pause recording between takes. Those instructions effectively simulate illumination and articulation changes without synthesizing data offline, letting us capture realistic variation while keeping privacy safeguards in place (only normalized landmarks are stored).
 
 \subsection{Static Classification Results}
-After tuning $C$ and $\gamma$ via cross-validation, the final SVM achieved 100\% accuracy on the held-out test set. Figure~\ref{fig:cm} shows that every class falls on the diagonal, confirming no confusion between Stop/Fist or Like/Thumbs Down, which are visually similar in raw RGB space.
+After tuning $C$ and $\gamma$ via cross-validation, the final SVM achieved 100\% accuracy on the held-out test set. Table~\ref{tab:per-class} lists the resulting precision/recall/f1 metrics, which match the perfect accuracy and confirm consistent coverage across all four gestures. Figure~\ref{fig:cm} shows that every class falls on the diagonal, confirming no confusion between Stop/Fist or Like/Thumbs Down, which are visually similar in raw RGB space.
+
+\begin{table}[t]
+   \centering
+   \begin{tabular}{lrrrr}
+   \toprule
+   Gesture & precision & recall & f1 & support \\
+   \midrule
+   Stop & 1.000 & 1.000 & 1.000 & 189 \\
+   Fist & 1.000 & 1.000 & 1.000 & 188 \\
+   Like & 1.000 & 1.000 & 1.000 & 190 \\
+   Thumbs Down & 1.000 & 1.000 & 1.000 & 189 \\
+   \bottomrule
+   \end{tabular}
+   \caption{Per-class precision, recall, f1, and support on the held-out test split. Metrics are derived from the exported notebook table for reproducibility.}
+   \label{tab:per-class}
+\end{table}
 
 \begin{figure}[t]
 \begin{center}

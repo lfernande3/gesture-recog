@@ -1,7 +1,25 @@
 \section{Methodology}
 
 \subsection{System Architecture}
-The deployment stack follows a simple flow: webcam frames are captured at 60 FPS, MediaPipe Hands extracts per-frame landmarks, the feature vector is normalized, and two decision blocks (static classifier plus zone state machine) decide whether any action should be issued. All heavy lifting happens inside MediaPipe; our Python logic simply transforms the landmarks and manages temporal smoothing.
+The deployment stack follows a simple flow: webcam frames are captured at 60 FPS, MediaPipe Hands extracts per-frame landmarks, the feature vector is normalized, and two decision blocks (static classifier plus zone state machine) decide whether any action should be issued. Implementation-wise we rely on \texttt{mediapipe~0.10.9} for landmarks, \texttt{scikit-learn~1.4.0} for the SVM pipeline, and \texttt{pyautogui~0.9.54} / \texttt{pycaw~20230407} to inject Windows media shortcuts or adjust the audio endpoint directly. All heavy lifting happens inside MediaPipe; our Python logic simply transforms the landmarks and manages temporal smoothing, as illustrated in Figure~\ref{fig:system}.
+
+\begin{figure}[t]
+   \centering
+   \renewcommand{\arraystretch}{1.2}
+   \begin{tabular}{c}
+      \fbox{\begin{minipage}{0.8\linewidth}\centering \textbf{Webcam Sensor}\\ 60 FPS RGB frames\end{minipage}} \\[0.45em]
+      $\Downarrow$ \\[0.45em]
+      \fbox{\begin{minipage}{0.8\linewidth}\centering \textbf{MediaPipe Hands}\\ 21 landmark triplets $(x,y,z)$\end{minipage}} \\[0.45em]
+      $\Downarrow$ \\[0.45em]
+      \fbox{\begin{minipage}{0.8\linewidth}\centering \textbf{Feature Extraction}\\ 63-D vector + StandardScaler\end{minipage}} \\[0.45em]
+      $\Downarrow$ \\[0.45em]
+      \fbox{\begin{minipage}{0.8\linewidth}\centering \textbf{SVM + Zone FSM}\\ Confidence gating and state logic\end{minipage}} \\[0.45em]
+      $\Downarrow$ \\[0.45em]
+      \fbox{\begin{minipage}{0.8\linewidth}\centering \textbf{Windows Actions}\\ pyautogui keys / pycaw volume\end{minipage}}
+   \end{tabular}
+   \caption{High-level dataflow from camera input to issued media actions. Only compact landmarks leave the MediaPipe block, keeping the rest of the stack lightweight and privacy-preserving.}
+   \label{fig:system}
+\end{figure}
 
 \subsection{Feature Extraction}
 Each frame provides 21 landmark triplets $(x,y,z)$ per detected hand. We flatten them into a 63-dimensional vector,
@@ -31,7 +49,29 @@ The SVM uses an RBF kernel with $C=10$ and probability outputs enabled for confi
 \end{table}
 
 \subsection{Zone-Based Navigation}
-Swipe-like commands are instead handled by a deterministic controller. The image width is split into LEFT ($x<0.25$), CENTER ($0.25 \leq x \leq 0.75$), and RIGHT ($x>0.75$) zones based on the wrist landmark. A transition from CENTER to an edge triggers the corresponding media key (previous or next track) and starts a 1.5-second cooldown. Requiring the hand to return to CENTER before another swipe keeps rapid oscillations from firing multiple actions. Figure~\ref{fig:ui} shows the on-screen HUD that teaches users where the active zones begin and how confident the classifier is.
+Swipe-like commands are instead handled by a deterministic controller. The image width is split into LEFT ($x<0.25$), CENTER ($0.25 \leq x \leq 0.75$), and RIGHT ($x>0.75$) zones based on the wrist landmark. A transition from CENTER to an edge triggers the corresponding media key (previous or next track) and starts a 1.5-second cooldown enforced in software. Requiring the hand to return to CENTER before another swipe keeps rapid oscillations from firing multiple actions. Figure~\ref{fig:zone-fsm} sketches the finite-state machine, and Figure~\ref{fig:ui} shows the on-screen HUD that teaches users where the active zones begin and how confident the classifier is. The exact media shortcuts are dispatched through \texttt{pyautogui}, while volume adjustments use \texttt{pycaw} to call the Windows Core Audio APIs; both paths share the same stability and cooldown logic so static and swipe gestures feel cohesive.
+
+\begin{figure}[t]
+   \centering
+   \begin{minipage}{0.92\linewidth}
+      \small\ttfamily
+      state = CENTER\newline
+      cooldown = 1.5s\newline
+      while camera\_active:\newline
+      \phantom{xx}wrist\_x = landmark[0].x\newline
+      \phantom{xx}if state == CENTER:\newline
+      \phantom{xxxx}if wrist\_x < 0.25 and cooled:\newline
+      \phantom{xxxxxx}send('prevtrack'); state = LEFT\newline
+      \phantom{xxxx}elif wrist\_x > 0.75 and cooled:\newline
+      \phantom{xxxxxx}send('nexttrack'); state = RIGHT\newline
+      \phantom{xx}else:\newline
+      \phantom{xxxx}if $0.25 \leq wrist\_x \leq 0.75$:\newline
+      \phantom{xxxxxx}state = CENTER\newline
+      \phantom{xxxx}update\_cooldown()
+   \end{minipage}
+   \caption{Pseudocode of the zone-based controller. Actions only fire on CENTER$\rightarrow$edge transitions once the shared cooldown expires.}
+   \label{fig:zone-fsm}
+\end{figure}
 
 \begin{figure}[t]
    \centering

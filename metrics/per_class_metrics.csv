@@ -1,0 +1,5 @@
+Gesture,precision,recall,f1,support
+Stop,1.0,1.0,1.0,189
+Fist,1.0,1.0,1.0,188
+Like,1.0,1.0,1.0,190
+Thumbs Down,1.0,1.0,1.0,189
