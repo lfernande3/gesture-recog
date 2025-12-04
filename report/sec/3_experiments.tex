@@ -19,10 +19,9 @@ We measured the full pipeline on a 12th-gen Intel Core i7 laptop. MediaPipe infe
 
 \begin{table}[t]
    \centering
-   \caption{Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted.}
-   \label{tab:runtime}
+   
    \begin{tabular}{@{}ll@{}}
-      	oprule
+      \toprule
       Component & Measurement \\
       \midrule
       MediaPipe inference & 9 ms \\
@@ -32,6 +31,8 @@ We measured the full pipeline on a 12th-gen Intel Core i7 laptop. MediaPipe infe
       End-to-end latency & 48 ms median \\
       \bottomrule
    \end{tabular}
+   \caption{Runtime measurements on a 12th-gen Intel Core i7 laptop. Latencies are per frame unless noted.}
+   \label{tab:runtime}
 \end{table}
 
 
